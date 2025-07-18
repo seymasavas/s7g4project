@@ -1,5 +1,18 @@
 describe('Project E2E testing', () => {
-  it('passes', () => {
+   it('form submit test', () => {
+    cy.visit('http://localhost:5174/')
+
+    cy.get('[data-cy="input-email"]').type("erdem.guntay@wit.com.tr");
+    cy.get('[data-cy="input-password"]').type("9fxIH0GXesEwH_I");
+
+    cy.get('[data-cy="input-terms"]').check();
+    cy.get('[data-cy="input-button"]').click();
+    cy.contains("Başarılı bir şekilde giriş yaptınız")
+
+  })
+
+  
+  it('wrong email test', () => {
     cy.visit('http://localhost:5174/')
 
     cy.get('[data-cy="input-email"]').type("deneme");
@@ -27,11 +40,10 @@ describe('Project E2E testing', () => {
 
     cy.get('[data-cy="input-email"]').type("erdem.guntay@wit.com.tr");
     cy.get('[data-cy="input-password"]').type("9fxIH0GXesEwH_I");
-  
 
-
-    cy.get('[class="invalid-feedback"]').should("have.length",0);
+    cy.get('.invalid-feedback').should('have.length', 0);
+    cy.get('[data-cy="input-button"]').should("be.disabled");
     
-
+  
   })
 })
